@@ -5,8 +5,129 @@
 </head>
 <body>
   <script>
-    // Your JavaScript goes here!
-    console.log("Hello, World!")
+
+    //global variables for the score
+    let playerScore = 0;
+    let computerScore = 0;
+    
+    function computerPlay(){
+      let choices = ["rock", "paper", "scissors"];
+      let compPick = Math.floor(choices.length * Math.random());
+      return choices[compPick];
+     }
+    
+    function playerPlay (){
+
+      let playPick = prompt("Please Choose: Rock, Paper, or Scissors?");
+      playPick = makeChoiceLowerCase(playPick);
+
+      if (checkPlayerInput(playPick)){
+        console.log("we got a game started");
+        return playPick;
+      }
+
+      else return false;
+      //console.log(playPick);
+    
+    }
+
+    function makeChoiceLowerCase(choice){
+
+      if (choice !== "" && choice !== null){
+        choice = choice.toLowerCase();
+      }
+
+      return choice;
+
+    }
+
+    function checkPlayerInput(choice){
+
+      if (choice === ""){
+        alert("Error Blank Response");
+        return false;
+        } 
+
+      else if (choice === null){
+        alert("game exit");
+        return false;
+        }
+
+      else if (choice !== "rock" &&  choice !== "paper" && choice !== "scissors"){
+        alert("Error, did not choose either rock, paper, or scissors!")
+        return false;
+        }
+
+      else return true;
+
+     }
+
+    function playGame(){
+
+      while(computerScore < 5 && playerScore < 5 ){
+
+        let compChoice = computerPlay();
+        let playChoice = playerPlay();
+
+       console.log(compChoice + " : is comps choice");
+       console.log(playChoice + " : is players choice");
+      
+   //game logic here if player choice is either rock paper or scissors
+       if (playChoice){
+
+         if (playChoice === compChoice){
+          console.log("game is a tie");
+          
+          }
+
+          else if (playChoice === "rock" && compChoice === "paper"){
+            console.log("Computer wins, Paper Beats Rock!");
+            computerScore++;
+          }
+
+          else if (playChoice === "rock" && compChoice === "scissors"){
+            console.log("Player wins, Rock Beats Scissors!");
+            playerScore++;
+          }
+
+          else if (playChoice === "paper" && compChoice === "scissors"){
+            console.log("Computer wins, Scissors Beats Paper!");
+            computerScore++;
+          }
+
+          else if (playChoice === "paper" && compChoice === "rock"){
+            console.log("Player wins, Paper Beats Rock!");
+            playerScore++;
+          }
+
+          else if (playChoice === "scissors" && compChoice === "paper"){
+            console.log("Player wins, Scissors Beats Paper!");
+            playerScore++;
+          }
+
+          else if (playChoice === "scissors" && compChoice === "rock"){
+            console.log("Computer wins, Rock Beats Scissors!");
+            computerScore++;
+          }
+
+          
+
+        }
+      
+        else return false;
+      }
+
+      console.log("GAME IS OVER!!  " + playerScore + " is players score, and " + computerScore + " is Computers score, thanks for playing!")
+    }
+
+    
+     
+  
+    //console.log(computerPlay());
+    //playerPlay();
+
+    playGame();
+    
   </script>
 </body>
 </html>
